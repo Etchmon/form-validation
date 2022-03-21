@@ -1,0 +1,29 @@
+.content {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0 0 0 / 1%);
+}
+
+.content div:only-child {
+  padding: 5rem;
+  border: 1px solid rgb(0 0 0 / 10%);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form input {
+  border: 1px solid rgb(0 0 0 / 10%);
+}
+
+form input:focus {
+  border: 2px solid #3700b3;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
