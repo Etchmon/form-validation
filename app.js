@@ -9,7 +9,10 @@ const Display = (() => {
             type: 'email',
             name: 'email',
             placeholder: 'Email Address',
+            pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$',
             required: 'required',
+            minLength: '5',
+            maxLength: '30'
         },
         {
             type: 'select',
@@ -21,20 +24,26 @@ const Display = (() => {
             type: 'text',
             name: 'zipCode',
             placeholder: 'Zip Code',
-            pattern: "[0-9]{5}",
+            pattern: '[0-9]+',
             required: 'required',
+            minLength: '5',
+            maxLength: '5'
         },
         {
             type: 'password',
             name: 'password',
             placeholder: 'Password',
             required: 'required',
+            minLength: '8',
+            maxLength: '20'
         },
         {
             type: 'password',
             name: 'confirmPassword',
             placeholder: 'Password',
             required: 'required',
+            minLength: '8',
+            maxLength: '20'
         }
     ];
 
@@ -42,22 +51,48 @@ const Display = (() => {
         const container = document.createElement('div');
         const label = document.createElement('label');
         const input = document.createElement('input');
+        const errMsg = document.createElement('span');
 
         label.innerHTML = data.placeholder;
-
+        errMsg.className = 'error';
         Object.assign(input, data);
+
+        input.addEventListener('input', function (event) {
+            if (input.validity.valid) {
+                errMsg.innerHTML = '';
+                errMsg.className = 'error'
+            } else {
+                showError(input, errMsg);
+            }
+        })
 
         container.appendChild(label);
         container.appendChild(input);
+        container.appendChild(errMsg);
 
         form.appendChild(container);
     });
+
+    const showError = (data, errMsg) => {
+        console.log(data.validity);
+        if (data.validity.valueMissing) {
+            errMsg.innerHTML = `Please enter a valid ${data.placeholder}`;
+        } else if (data.validity.typeMismatch || data.validity.patternMismatch) {
+            errMsg.innerHTML = `Entered value needs to be a ${data.placeholder}`;
+        } else if (data.validity.tooShort) {
+            errMsg.innerHTML = `Entered value needs to be at least ${data.minLength}`;
+        } else if (data.validity.tooLong) {
+            errMsg.innerHTML = `Entered value needs to be under ${data.maxLength}`;
+        };
+
+        errMsg.className = 'error active';
+    }
 
     const initiateDom = (() => {
         Object.assign(btn, {
             type: 'Submit',
             innerHTML: 'Submit'
-        })
+        });
 
         container.appendChild(form);
         container.appendChild(btn);
