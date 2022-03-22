@@ -21,18 +21,25 @@ section img {
   max-height: 100%;
   height: 100%;
   width: 100%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+section div {
+  display: grid;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-rows: minmax(1fr, max-content);
   padding: 2rem;
+  height: auto;
 }
 
 form legend {
-  font-size: 3rem;
+  font-size: 5vh;
   font-style: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 form div {
@@ -46,15 +53,14 @@ form div {
 
 form div label {
   font-size: 1.2rem;
-}
-
-form div * {
   margin-bottom: 0.5rem;
 }
 
 form button {
-  height: 4rem;
-  width: 12rem;
+  height: 5vh;
+  width: 10vw;
+  max-height: 4rem;
+  max-width: 12rem;
   background-color: rgb(98 0 238/ 70%);
   border: none;
   border-radius: 5px;
@@ -66,7 +72,7 @@ form button {
 form input {
   border: 1px solid rgb(0 0 0 / 10%);
   width: 100%;
-  height: 2.5rem;
+  height: 40%;
 }
 
 form input::placeholder {

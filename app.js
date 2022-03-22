@@ -64,7 +64,7 @@ const Display = (() => {
         const input = document.createElement('input');
         const errMsg = document.createElement('span');
 
-        label.innerHTML = data.placeholder;
+        label.innerHTML = data.placeholder + ':';
         errMsg.className = 'error';
         Object.assign(input, data);
 
@@ -72,8 +72,10 @@ const Display = (() => {
             if (input.validity.valid) {
                 errMsg.innerHTML = '';
                 errMsg.className = 'error'
+                input.style.border = '2px solid #3700b3';
             } else {
                 showError(input, errMsg);
+                input.style.border = '1px solid crimson';
             }
         })
 
@@ -97,12 +99,29 @@ const Display = (() => {
         };
 
         errMsg.className = 'error active';
-    }
+    };
+
+    btn.addEventListener('click', function (event) {
+        const data = document.querySelectorAll('input');
+        console.log(data);
+
+        data.forEach(element => {
+            const errMsg = element.nextSibling;
+            console.log(errMsg)
+            console.log(element.validity)
+            if (element.validity.valid === false) {
+                event.preventDefault();
+                element.style.border = '1px solid crimson';
+                showError(element, errMsg)
+            }
+        });
+
+    })
 
     const initiateDom = (() => {
         Object.assign(btn, {
             type: 'Submit',
-            innerHTML: 'Submit'
+            innerHTML: 'Submit',
         });
 
         formContainer.appendChild(form);
