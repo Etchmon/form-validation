@@ -1,8 +1,19 @@
 const Display = (() => {
     const dom = document.querySelector('.content');
-    const container = document.createElement('div');
+    const formContainer = document.createElement('div');
     const form = document.createElement('form');
     const btn = document.createElement('button');
+    const container = document.createElement('section');
+    const image = document.createElement('img');
+    const legend = document.createElement('legend');
+
+    legend.innerHTML = "Registration Form";
+    form.appendChild(legend)
+
+    Object.assign(image, {
+        src: './ball-image.jpg',
+        alt: 'ball image'
+    })
 
     const inputs = [
         {
@@ -48,7 +59,7 @@ const Display = (() => {
     ];
 
     inputs.forEach(data => {
-        const container = document.createElement('div');
+        const inputBox = document.createElement('div');
         const label = document.createElement('label');
         const input = document.createElement('input');
         const errMsg = document.createElement('span');
@@ -66,11 +77,11 @@ const Display = (() => {
             }
         })
 
-        container.appendChild(label);
-        container.appendChild(input);
-        container.appendChild(errMsg);
+        inputBox.appendChild(label);
+        inputBox.appendChild(input);
+        inputBox.appendChild(errMsg);
 
-        form.appendChild(container);
+        form.appendChild(inputBox);
     });
 
     const showError = (data, errMsg) => {
@@ -94,8 +105,10 @@ const Display = (() => {
             innerHTML: 'Submit'
         });
 
-        container.appendChild(form);
-        container.appendChild(btn);
+        formContainer.appendChild(form);
+        form.appendChild(btn);
+        container.appendChild(image);
+        container.appendChild(formContainer);
         dom.appendChild(container);
     })();
 
